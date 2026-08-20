@@ -52,6 +52,7 @@ void get_rom_image_path(char *rom_file, char *out_image_path)
 {
     if (str_endsWith(rom_file, ".p8") || str_endsWith(rom_file, ".png")) {
         snprintf(out_image_path, STR_MAX - 1, "/mnt/SDCARD/Roms/%s", rom_file);
+        return;
     }
 
     char *clean_rom_name = file_removeExtension(basename(rom_file));
@@ -94,6 +95,8 @@ void play_activity_db_open(void)
                      "CREATE INDEX play_activity_rom_id_index ON play_activity(rom_id);",
                      NULL, NULL, NULL);
     }
+    sqlite3_exec(play_activity_db, "PRAGMA journal_mode=WAL;", NULL, NULL, NULL);
+    sqlite3_busy_timeout(play_activity_db, 3000);
 }
 
 int play_activity_db_transaction(int (*exec_transaction)(void))
