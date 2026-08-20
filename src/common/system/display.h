@@ -228,6 +228,8 @@ uint32_t display_getBrightnessRaw()
 int display_getBrightnessFromRaw()
 {
     int value_raw = display_getBrightnessRaw();
+    if (value_raw <= 0)
+        return 0;
     int value = round((log(value_raw / 3.0) / 0.350656));
     return value;
 }

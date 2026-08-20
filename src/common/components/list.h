@@ -415,8 +415,12 @@ void list_getItemValueLabel(ListItem *item, char *out_label)
 {
     if (item->value_formatter != NULL)
         item->value_formatter(item, out_label);
-    else if (item->value_labels[0][0] != '\0')
-        sprintf(out_label, "%s", item->value_labels[item->value]);
+    else if (item->value_labels[0][0] != '\0') {
+        int label_index = item->value;
+        if (label_index < 0 || label_index >= MAX_NUM_VALUES)
+            label_index = 0; // guard against out-of-range config values
+        sprintf(out_label, "%s", item->value_labels[label_index]);
+    }
     else
         sprintf(out_label, "%d", item->value);
 }
