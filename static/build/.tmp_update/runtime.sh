@@ -69,9 +69,9 @@ main() {
     cd $sysdir
     bootScreen "Boot"
 
-    # Set filebrowser branding to "Onion" and apply custom theme
+    # Set filebrowser branding to "CelobinhaOS" and apply custom theme
     if [ -f "$sysdir/config/filebrowser/first.run" ]; then
-        $sysdir/bin/filebrowser config set --branding.name "Onion" -d $sysdir/config/filebrowser/filebrowser.db
+        $sysdir/bin/filebrowser config set --branding.name "CelobinhaOS" -d $sysdir/config/filebrowser/filebrowser.db
         $sysdir/bin/filebrowser config set --branding.files "$sysdir/config/filebrowser/theme" -d $sysdir/config/filebrowser/filebrowser.db
 
         rm "$sysdir/config/filebrowser/first.run"
